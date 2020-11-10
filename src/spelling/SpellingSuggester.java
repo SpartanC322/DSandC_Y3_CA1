@@ -1,9 +1,6 @@
 package spelling;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class SpellingSuggester {
 
@@ -43,7 +40,24 @@ public class SpellingSuggester {
     private List<String> deletions(String word) {
         // All deletions of a letter in word
 
-       throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<String> list = new ArrayList<>();
+
+        for(int i = 0; i < word.length(); i++)
+        {
+            for (char b = 'a'; b <= 'z'; b++)
+            {
+                if (word.charAt(i) == 'b')
+                {
+                    String delete = word.replace(b, ' ');
+                    String deleteSpace = delete.replace(" ", "");
+                    if (dictionary.isWord(deleteSpace))
+                    {
+                        list.add(deleteSpace);
+                    }
+                }
+            }
+        }
+        return list;
     }
 
     private List<String> insertions(String word) {
