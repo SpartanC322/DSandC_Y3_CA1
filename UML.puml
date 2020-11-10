@@ -1,0 +1,75 @@
+@startuml
+
+class TextEditorMain
+{
+main()
+}
+
+class TextEditorFrame
+{
+    - final int FRAME_WIDTH = 400
+    - final int FRAME_HEIGHT = 250
+    - final int TEXT_AREA_ROWS = 10
+    - final int TEXT_AREA_COLUMNS = 30
+    - final int NUM_SUGGESTIONS = 20
+    - JTextArea textArea
+    - int start
+    - int end
+    - int wordLength
+    - Dictionary dictionary
+
+    TextEditorFrame(Dictionary dictionary)
+}
+
+interface Dictionary
+{
+    - load(String file)
+    + isWord(String s): boolean
+    + addWord(String word): boolean
+    + size(): int
+}
+
+class SpellingSuggester
+{
+    - Dictionary dictionary
+    + getSuggestions(String word): List<String>
+    + replacements(String word): List<String>
+    + deletions(String word): List<String>
+    + insertions(String word): List<String>
+    + transpositions(String word): List<String>
+}
+
+class DictionaryLinkedList
+{
+    - LinkedList<String> dictionary
+    + load(String fileName)
+    + isWord(String s): boolean
+    + addWord(String word): boolean
+    + size(): int
+}
+
+class DictionaryTreeSet
+{
+    - LinkedList<String> dictionary
+    + load(String fileName)
+    + isWord(String s): boolean
+    + addWord(String word): boolean
+    + size(): int
+}
+
+class DictionaryHashSet
+{
+    - HashSet<String> dictionary
+    + load(String fileName)
+    + isWord(String s): boolean
+    + addWord(String word): boolean
+    + size(): int
+}
+
+Dictionary <|-- TextEditorMain
+Dictionary <|--- SpellingSuggester
+Dictionary <|-- DictionaryLinkedList
+Dictionary <|-- DictionaryTreeSet
+Dictionary <|- DictionaryHashSet
+
+@enduml

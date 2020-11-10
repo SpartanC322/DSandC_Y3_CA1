@@ -11,12 +11,19 @@ public class SpellingSuggester {
     }
 
     public List<String> getSuggestions(String word) {
-        List<String> list = new ArrayList();
-        list.add("Any value"); // for testing
+        List<String> list = new ArrayList<>();
+        //list.add(word); // for testing
 
         //call the replacements, deletions etc methods and add results to list
 
+        //list.add(replacements(word).toString().replace("[", "").replace("]", "")
+         //       + ", " + deletions(word).toString().replace("[", "").replace("]", ""));
+
+        list.addAll(replacements(word));
+        list.addAll(deletions(word));
+
         return list;
+
     }
 
     private List<String> replacements(String word) {
@@ -46,7 +53,7 @@ public class SpellingSuggester {
         {
             for (char b = 'a'; b <= 'z'; b++)
             {
-                if (word.charAt(i) == 'b')
+                if (word.charAt(i) == b)
                 {
                     String delete = word.replace(b, ' ');
                     String deleteSpace = delete.replace(" ", "");
